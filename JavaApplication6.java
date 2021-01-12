@@ -16,25 +16,31 @@ public class JavaApplication6 {
      */
     public static void main(String[] args) {
         int[] masinos = new int[8];
-        boolean arPasiektasFinisas = false;
-        while (!arPasiektasFinisas) {
+        boolean arPasiektasSimtas = false;
+        int simtukaiCount = 0;
+        while (simtukaiCount < 10) {
+            while (!arPasiektasSimtas) {
+                for (int i = 0; i < masinos.length; i++) {
+                    int randomAtstumas = (int) (Math.random() * 10) + 1;
+                    masinos[i] += randomAtstumas;
+                    if (masinos[i] > simtukaiCount * 100 + 100) {
+                        arPasiektasSimtas = true;
+                        simtukaiCount++;
+                    }
+                }
+            }
+            arPasiektasSimtas = false;
+            System.out.println("pasiekta " + simtukaiCount + "00 kilometru atkarpa!");
             for (int i = 0; i < masinos.length; i++) {
-                int randomAtstumas = (int) (Math.random() * 10) + 1;
-                masinos[i] += randomAtstumas;
-                if (masinos[i] > 100) {
-                    arPasiektasFinisas = true;
+                for (int j = i + 1; j < masinos.length; j++) {
+                    if (masinos[i] < masinos[j]) {
+                        int temp = masinos[i];
+                        masinos[i] = masinos[j];
+                        masinos[j] = temp;
+                    }
                 }
+                System.out.println(masinos[i]);
             }
-        }
-        for (int i = 0; i < masinos.length; i++) {
-            for (int j = i + 1; j < masinos.length; j++) {
-                if (masinos[i] < masinos[j]) {
-                    int temp = masinos[i];
-                    masinos[i] = masinos[j];
-                    masinos[j] = temp;
-                }
-            }
-            System.out.println(masinos[i]);
         }
     }
 }
